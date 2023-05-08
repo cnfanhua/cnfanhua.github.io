@@ -1,0 +1,309 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>fanhua blog</title><meta name="author" content="fanhua"><meta name="copyright" content="fanhua"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta property="og:type" content="website">
+<meta property="og:title" content="fanhua blog">
+<meta property="og:url" content="https://fanhua.tech/index.html">
+<meta property="og:site_name" content="fanhua blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fanhua.tech/img/avatar.jpg">
+<meta property="article:author" content="fanhua">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fanhua.tech/img/avatar.jpg"><link rel="shortcut icon" href="/img/avatar.jpg"><link rel="canonical" href="https://fanhua.tech/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-117147492-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-117147492-1');
+</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-05-08 08:46:36'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/avatar.jpg'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">50</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tag/"><div class="headline">标签</div><div class="length-num">33</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div></div></div><div id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/202007180949237661.png)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">fanhua blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/cnfanhua" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:waxcjj@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2023/05/08/docker%E5%AE%B9%E5%99%A8%E5%86%85postgresql%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE/" title="docker容器内postgresql的配置文件位置">     <img class="post_bg" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs/other/picGo/202305080839247.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="docker容器内postgresql的配置文件位置"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/05/08/docker%E5%AE%B9%E5%99%A8%E5%86%85postgresql%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE/" title="docker容器内postgresql的配置文件位置">docker容器内postgresql的配置文件位置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-05-08T00:41:40.000Z" title="发表于 2023-05-08 08:41:40">2023-05-08</time></span></div><div class="content">文件( postgresql.conf )位置如下，特此记录下
+1/var/lib/postgresql/data</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2021/07/31/%E5%89%8D%E7%AB%AFexcel%E5%AF%BC%E5%87%BADemo-SheetJS/" title="前端excel导出Demo(SheetJS)">     <img class="post_bg" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/life-code-typography-hd-1600.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="前端excel导出Demo(SheetJS)"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/07/31/%E5%89%8D%E7%AB%AFexcel%E5%AF%BC%E5%87%BADemo-SheetJS/" title="前端excel导出Demo(SheetJS)">前端excel导出Demo(SheetJS)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-31T02:47:33.000Z" title="发表于 2021-07-31 10:47:33">2021-07-31</time></span></div><div class="content">简单的 DEMO 示例、JS 库使用 SheetJS
+12345678910111213141516171819202122232425262728293031323334353637383940&lt;table id=&quot;tb&quot;&gt;  &lt;thead&gt;    &lt;tr&gt;      &lt;th&gt;团队名称&lt;/th&gt;      &lt;th&gt;负责人&lt;/th&gt;      &lt;th&gt;签约总数&lt;/th&gt;      &lt;th&gt;重点人群数&lt;/th&gt;      &lt;th&gt;履约总数&lt;/th&gt;    &lt;/tr&gt;  &lt;/thead&gt;  &lt;tbody&gt;    &lt;tr&gt;      &lt;td&gt;1...&lt;/td&gt;      &lt;td&gt;2...&lt;/td&gt;      &lt;td&gt;3...&lt;/td&gt;      &lt;td&gt;4...&lt;/td&gt;    ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/09/18/centos7%E5%BC%80%E7%A6%81%E7%AB%AF%E5%8F%A3%E4%BB%A5%E5%8F%8AIP%E9%99%90%E5%88%B6/" title="centos7开禁端口以及IP限制">     <img class="post_bg" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/centos.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="centos7开禁端口以及IP限制"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/09/18/centos7%E5%BC%80%E7%A6%81%E7%AB%AF%E5%8F%A3%E4%BB%A5%E5%8F%8AIP%E9%99%90%E5%88%B6/" title="centos7开禁端口以及IP限制">centos7开禁端口以及IP限制</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-09-18T00:03:10.000Z" title="发表于 2020-09-18 08:03:10">2020-09-18</time></span></div><div class="content">查看防火墙状态1234firewall-cmd --state#orsystemctl status firewalld
+
+查看默认区域的设置1firewall-cmd --list-all
+
+允许(禁止)开机启动防火墙12systemctl enable firewalld   # 允许启动systemctl disable firewalld  # 禁止
+
+开启(关闭)防火墙12systemctl start firewalld  #开启systemctl stop firewalld   #关闭
+
+开启(关闭)某端口123456firewall-cmd --add-port=&lt;port&gt;/&lt;protocol&gt; #添加端口/协议（TCP/UDP）firewall-cmd --remove-port=&lt;port&gt;/&lt;protocol&gt; #移除端口/协议（TCP/UDP）firewall-cmd --list-ports #查看开放的端口#例firewall-cmd --add-port=1521/tcp  #开放1521端口
+
+允许(禁 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/05/31/%E5%85%B3%E4%BA%8Egitalk%E6%8A%A5Validation-Failed%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="关于gitalk报Validation Failed的解决方案">     <img class="post_bg" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/gitalk.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于gitalk报Validation Failed的解决方案"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/05/31/%E5%85%B3%E4%BA%8Egitalk%E6%8A%A5Validation-Failed%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="关于gitalk报Validation Failed的解决方案">关于gitalk报Validation Failed的解决方案</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-05-31T08:24:27.000Z" title="发表于 2020-05-31 16:24:27">2020-05-31</time></span></div><div class="content">报错原因：因为 github 对 Issues label 的长度有了要求，如果超过 50 个字符串则会报错.
+
+解决方案： &nbsp;&nbsp;定位到博客主题中的 gitalk.ejs 文件
+
+12345678910111213//...省略其他代码const gitalk = new Gitalk(&#123;  clientID: &quot;&lt;%= theme.gitalk.clientID %&gt;&quot;,  clientSecret: &quot;&lt;%= theme.gitalk.clientSecret %&gt;&quot;,  repo: &quot;&lt;%= theme.gitalk.repo %&gt;&quot;,  owner: &quot;&lt;%= theme.gitalk.owner %&gt;&quot;,  // id使用location.pathname 肯定超出50字符  id: location.pathname,  admin: [&quot;&lt;%= theme.gitalk.admin %&gt;&quo ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/05/30/Oracle%E5%88%A0%E9%99%A4%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%A9%BA%E9%97%B4%E4%B8%8E%E7%94%A8%E6%88%B7%E5%91%BD%E4%BB%A4/" title="Oracle删除创建表空间与用户命令">     <img class="post_bg" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/database.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Oracle删除创建表空间与用户命令"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/05/30/Oracle%E5%88%A0%E9%99%A4%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%A9%BA%E9%97%B4%E4%B8%8E%E7%94%A8%E6%88%B7%E5%91%BD%E4%BB%A4/" title="Oracle删除创建表空间与用户命令">Oracle删除创建表空间与用户命令</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-05-30T06:10:01.000Z" title="发表于 2020-05-30 14:10:01">2020-05-30</time></span></div><div class="content">连接到 oracle
+12sqlplus /nologconn sys/sys@127.0.0.1/oral as sysdba;
+
+1.删除12345// 删除用户, $user_name替换成实际的用户drop user $user_name cascade;// 删除表空间, $tablespace_name替换成实际的表空间名drop tablespace $tablespace_name INCLUDING CONTENTS;
+
+2.创建12345// 新增表空间create tablespace $tablespace_name datafile &#x27;$tablespace_name.DBF&#x27; size 300m autoextend on next 10m maxsize unlimited;// 新增用户create user $user_name identified by $user_password default tablespace $tablespace_name;
+
+3.授权1grant resource,connect,dba to $ ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2019/08/30/ABP%E6%89%A9%E5%B1%95OrganizationUnit%E5%AE%9E%E4%BD%93/" title="ABP扩展OrganizationUnit实体">     <img class="post_bg" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/20210106095503.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ABP扩展OrganizationUnit实体"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/08/30/ABP%E6%89%A9%E5%B1%95OrganizationUnit%E5%AE%9E%E4%BD%93/" title="ABP扩展OrganizationUnit实体">ABP扩展OrganizationUnit实体</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-08-30T08:43:26.000Z" title="发表于 2019-08-30 16:43:26">2019-08-30</time></span></div><div class="content">由于 OrganizationUnit 是非抽象的，与扩展 role\user 有所不同
+1.新增 OrganizationUnitExtended 继承自 OrganizationUnit
+2.添加到 XxDbContext 下1public virtual DbSet&lt;OrganizationUnitExtended&gt; OrganizationUnitsExtended &#123; get; set; &#125;
+
+3.生成迁移文件，重点看下图的标红部分1add-migration Add_Entity_OrganizationUnitExtended
+
+
+Discriminator是框架自动生成的，必须设置defaultValue，否则数据无法显示。官方文档未说明其原因。
+
+4.更新到数据库1update-database
+
+原文链接：https://docs.aspnetzero.com/documents/aspnet-core-angular/latest/Extending-Existing-Entities#extending-non-abstract- ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2019/02/16/Manjaro-linux-%E5%AE%89%E8%A3%85Mariadb/" title="Manjaro linux 安装Mariadb">     <img class="post_bg" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/mysql.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Manjaro linux 安装Mariadb"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/02/16/Manjaro-linux-%E5%AE%89%E8%A3%85Mariadb/" title="Manjaro linux 安装Mariadb">Manjaro linux 安装Mariadb</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-02-16T13:22:38.000Z" title="发表于 2019-02-16 21:22:38">2019-02-16</time></span></div><div class="content">1.下载安装1sudo pacman -S mariadb
+
+安装完后执行
+1sudo mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+
+2.启用服务1systemctl start mariadb
+
+3.设置密码、远程访问等信息1/usr/bin/mysql_secure_installation
+
+3.设置root密码123sudo mysqlset password for root@localhost = password(&#x27;新密码&#x27;);exit;
+
+4.登录1mysql -uroot -p
+
+enjoy…
+</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2019/01/25/Github-Pages-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E5%90%AF%E7%94%A8-HTTPS/" title="Github Pages 自定义域名启用 HTTPS">     <img class="post_bg" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/life-code-typography-hd-1600.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Github Pages 自定义域名启用 HTTPS"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/01/25/Github-Pages-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E5%90%AF%E7%94%A8-HTTPS/" title="Github Pages 自定义域名启用 HTTPS">Github Pages 自定义域名启用 HTTPS</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-01-25T03:00:05.000Z" title="发表于 2019-01-25 11:00:05">2019-01-25</time></span></div><div class="content">
+搭建博客教程
+免费使用 Let’s Encrypt
+1.DNS 解析修改-以记录 A 为例找到 DNS 提供商，修改解析界面（图为阿里的）记录 A 指向为如下 ip 地址，详见github
+
+
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+
+
+
+等待重新解析…
+2.github 项目强制启用 https
+如果提示 Unavailable for your site because your domain is not properly configured to support HTTPS。 请等待重新解析之后 刷新页面
+</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2019/01/18/linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="linux 常用命令">     <img class="post_bg" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/manjaro.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="linux 常用命令"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/01/18/linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="linux 常用命令">linux 常用命令</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-01-18T08:55:44.000Z" title="发表于 2019-01-18 16:55:44">2019-01-18</time></span></div><div class="content">1.ls 列出文件12ls [-alrtAFR] [name...]ls -ltr s*  //列出目前工作目录下所有名称是 s 开头的文件，越新的排越后面
+
+
+
+
+命令
+说明
+
+
+
+-a
+显示所有文件及目录 (ls 内定将文件名或目录名称开头为”.”的视为隐藏档，不会列出)
+
+
+-l
+除文件名称外，亦将文件型态、权限、拥有者、文件大小等资讯详细列出
+
+
+-r
+将文件以相反次序显示(原定依英文字母次序)
+
+
+-t
+将文件依建立时间之先后次序列出
+
+
+-A
+同 -a ，但不列出 “.” (目前目录) 及 “..” (父目录)
+
+
+-F
+在列出的文件名称后加一符号；例如可执行档则加 “*“, 目录则加 “/“
+
+
+-R
+若目录下有文件，则以下之文件亦皆依序列出
+
+
+2.pwd 返回当前工作目录的名字，为绝对路径3.mkdir 新建文件夹4.rm 删除1rm [option] [name...]
+
+
+
+
+命令
+说明
+
+
+
+-i
+删除前逐一询问确认。
+
+
+-f
+即使原档案属性设为唯读，亦直接删除，无需逐一确认。
+
+
+-r
+将目录及以下之档案亦逐一删除。
+
+
+5.mv 移动\重命名12mv [o ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2019/01/17/Manjaro-linux-%E5%AE%89%E8%A3%85Virtualbox/" title="Manjaro linux 安装Virtualbox">     <img class="post_bg" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/manjaro.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Manjaro linux 安装Virtualbox"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/01/17/Manjaro-linux-%E5%AE%89%E8%A3%85Virtualbox/" title="Manjaro linux 安装Virtualbox">Manjaro linux 安装Virtualbox</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-01-17T08:26:18.000Z" title="发表于 2019-01-17 16:26:18">2019-01-17</time></span></div><div class="content">1.安装前-查看内核版本123mhwd-kernel -li或uname -a
+
+如图所示，414 即为版本号
+2.安装 Virtualbox1sudo pacman -S virtualbox
+
+执行以上命令并选择匹配的版本
+3.常见问题3.1.修复无法启动的 BUG1sudo /sbin/rcvboxdrv setup   //修复无法启动的BUG
+
+3.2.安装“增强功能”
+
+手动安装(当前版本 6.0.4)：VirtualBox 6.0.4 Oracle VM VirtualBox Extension Pack
+自动安装：启动虚拟机后，点击菜单“设备”-&gt;“安装增强功能”
+
+
+3.2.使用 USB 外设1sudo gpasswd -a $USER vboxusers   //添加当前用户到vboxusers用户组
+
+需要将$USER替换为你的用户名
+</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/avatar.jpg'" alt="avatar"/><div class="author-info__name">fanhua</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">50</div></a></div><div class="card-info-data-item is-center"><a href="/tag/"><div class="headline">标签</div><div class="length-num">33</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/cnfanhua"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/cnfanhua" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:waxcjj@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/05/08/docker%E5%AE%B9%E5%99%A8%E5%86%85postgresql%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE/" title="docker容器内postgresql的配置文件位置"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs/other/picGo/202305080839247.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="docker容器内postgresql的配置文件位置"/></a><div class="content"><a class="title" href="/2023/05/08/docker%E5%AE%B9%E5%99%A8%E5%86%85postgresql%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE/" title="docker容器内postgresql的配置文件位置">docker容器内postgresql的配置文件位置</a><time datetime="2023-05-08T00:41:40.000Z" title="发表于 2023-05-08 08:41:40">2023-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/31/%E5%89%8D%E7%AB%AFexcel%E5%AF%BC%E5%87%BADemo-SheetJS/" title="前端excel导出Demo(SheetJS)"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/life-code-typography-hd-1600.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="前端excel导出Demo(SheetJS)"/></a><div class="content"><a class="title" href="/2021/07/31/%E5%89%8D%E7%AB%AFexcel%E5%AF%BC%E5%87%BADemo-SheetJS/" title="前端excel导出Demo(SheetJS)">前端excel导出Demo(SheetJS)</a><time datetime="2021-07-31T02:47:33.000Z" title="发表于 2021-07-31 10:47:33">2021-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/18/centos7%E5%BC%80%E7%A6%81%E7%AB%AF%E5%8F%A3%E4%BB%A5%E5%8F%8AIP%E9%99%90%E5%88%B6/" title="centos7开禁端口以及IP限制"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/centos.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="centos7开禁端口以及IP限制"/></a><div class="content"><a class="title" href="/2020/09/18/centos7%E5%BC%80%E7%A6%81%E7%AB%AF%E5%8F%A3%E4%BB%A5%E5%8F%8AIP%E9%99%90%E5%88%B6/" title="centos7开禁端口以及IP限制">centos7开禁端口以及IP限制</a><time datetime="2020-09-18T00:03:10.000Z" title="发表于 2020-09-18 08:03:10">2020-09-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/05/31/%E5%85%B3%E4%BA%8Egitalk%E6%8A%A5Validation-Failed%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="关于gitalk报Validation Failed的解决方案"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/gitalk.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于gitalk报Validation Failed的解决方案"/></a><div class="content"><a class="title" href="/2020/05/31/%E5%85%B3%E4%BA%8Egitalk%E6%8A%A5Validation-Failed%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="关于gitalk报Validation Failed的解决方案">关于gitalk报Validation Failed的解决方案</a><time datetime="2020-05-31T08:24:27.000Z" title="发表于 2020-05-31 16:24:27">2020-05-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/05/30/Oracle%E5%88%A0%E9%99%A4%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%A9%BA%E9%97%B4%E4%B8%8E%E7%94%A8%E6%88%B7%E5%91%BD%E4%BB%A4/" title="Oracle删除创建表空间与用户命令"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/database.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Oracle删除创建表空间与用户命令"/></a><div class="content"><a class="title" href="/2020/05/30/Oracle%E5%88%A0%E9%99%A4%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%A9%BA%E9%97%B4%E4%B8%8E%E7%94%A8%E6%88%B7%E5%91%BD%E4%BB%A4/" title="Oracle删除创建表空间与用户命令">Oracle删除创建表空间与用户命令</a><time datetime="2020-05-30T06:10:01.000Z" title="发表于 2020-05-30 14:10:01">2020-05-30</time></div></div></div></div></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tag/%E7%94%B5%E8%84%91%E6%97%A5%E5%B8%B8/" style="font-size: 1.23em; color: rgb(161, 54, 60)">电脑日常</a><a href="/tag/ABP/" style="font-size: 1.1em; color: rgb(109, 21, 139)">ABP</a><a href="/tag/Asp-Net/" style="font-size: 1.37em; color: rgb(28, 41, 105)">Asp.Net</a><a href="/tag/Excel/" style="font-size: 1.17em; color: rgb(115, 152, 142)">Excel</a><a href="/tag/Apache/" style="font-size: 1.1em; color: rgb(26, 171, 75)">Apache</a><a href="/tag/JavaScript/" style="font-size: 1.3em; color: rgb(23, 61, 100)">JavaScript</a><a href="/tag/Linux/" style="font-size: 1.5em; color: rgb(199, 4, 190)">Linux</a><a href="/tag/AgainstGFW/" style="font-size: 1.17em; color: rgb(188, 82, 91)">AgainstGFW</a><a href="/tag/C/" style="font-size: 1.1em; color: rgb(15, 11, 167)">C</a><a href="/tag/Cpp/" style="font-size: 1.1em; color: rgb(35, 57, 25)">Cpp</a><a href="/tag/Net/" style="font-size: 1.17em; color: rgb(197, 100, 118)">.Net</a><a href="/tag/Asp-Net-Core/" style="font-size: 1.17em; color: rgb(34, 91, 0)">Asp.Net Core</a><a href="/tag/Entity-Framework/" style="font-size: 1.1em; color: rgb(96, 79, 164)">Entity Framework</a><a href="/tag/Github%E5%8D%9A%E5%AE%A2/" style="font-size: 1.23em; color: rgb(144, 2, 55)">Github博客</a><a href="/tag/Hexo/" style="font-size: 1.1em; color: rgb(149, 55, 44)">Hexo</a><a href="/tag/Mvc/" style="font-size: 1.17em; color: rgb(126, 185, 66)">Mvc</a><a href="/tag/Mysql/" style="font-size: 1.23em; color: rgb(117, 17, 70)">Mysql</a><a href="/tag/Mariadb/" style="font-size: 1.1em; color: rgb(15, 28, 141)">Mariadb</a><a href="/tag/Autofac/" style="font-size: 1.1em; color: rgb(93, 138, 177)">Autofac</a><a href="/tag/Npoi/" style="font-size: 1.1em; color: rgb(134, 16, 39)">Npoi</a><a href="/tag/Oracle/" style="font-size: 1.23em; color: rgb(67, 36, 39)">Oracle</a><a href="/tag/Python3/" style="font-size: 1.17em; color: rgb(34, 89, 198)">Python3</a><a href="/tag/Sql-Server/" style="font-size: 1.1em; color: rgb(177, 173, 17)">Sql Server</a><a href="/tag/Sublime-Text/" style="font-size: 1.1em; color: rgb(160, 174, 64)">Sublime Text</a><a href="/tag/Visual-Studio/" style="font-size: 1.1em; color: rgb(137, 79, 123)">Visual Studio</a><a href="/tag/WeiXin/" style="font-size: 1.1em; color: rgb(80, 46, 88)">WeiXin</a><a href="/tag/docker/" style="font-size: 1.1em; color: rgb(115, 163, 193)">docker</a><a href="/tag/postgresql/" style="font-size: 1.1em; color: rgb(183, 38, 178)">postgresql</a><a href="/tag/jQuery/" style="font-size: 1.1em; color: rgb(47, 18, 102)">jQuery</a><a href="/tag/Pl-Sql/" style="font-size: 1.1em; color: rgb(86, 93, 170)">Pl/Sql</a><a href="/tag/gitalk/" style="font-size: 1.1em; color: rgb(194, 185, 9)">gitalk</a><a href="/tag/wow/" style="font-size: 1.43em; color: rgb(61, 127, 164)">wow</a><a href="/tag/Vim/" style="font-size: 1.1em; color: rgb(24, 95, 139)">Vim</a></div></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/07/"><span class="card-archive-list-date">七月 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/09/"><span class="card-archive-list-date">九月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/05/"><span class="card-archive-list-date">五月 2020</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/08/"><span class="card-archive-list-date">八月 2019</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/02/"><span class="card-archive-list-date">二月 2019</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/01/"><span class="card-archive-list-date">一月 2019</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2018/06/"><span class="card-archive-list-date">六月 2018</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item more is-center"><a class="card-archive-list-link-more" href="/archives/">
+              <span>查看更多</span><i class="fas fa-angle-right"  ></i></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">50</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">59.5k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-05-08T00:46:35.894Z"></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/202007180949237661.png)"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By fanhua</div><div class="framework-info"><span>Github </span><a target="_blank" rel="noopener" href="https://github.com/cnfanhua">cnfanhua</a><span class="footer-separator"> </span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>

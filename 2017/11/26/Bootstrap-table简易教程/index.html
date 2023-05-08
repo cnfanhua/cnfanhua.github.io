@@ -1,0 +1,237 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bootstrap-table简易教程 | fanhua blog</title><meta name="keywords" content="Asp.Net,JavaScript"><meta name="author" content="fanhua"><meta name="copyright" content="fanhua"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="下载地址和源码1https:&#x2F;&#x2F;github.com&#x2F;wenzhixin&#x2F;bootstrap-table  相关 Js 和 Css123~&#x2F;jquery.js~&#x2F;bootstrap-table.js~&#x2F;bootstrap-table-zh-CN.min.js  12~&#x2F;bootstrap.min.css~&#x2F;bootstrap-table.min.css  使用在标签内写入如下 html 代码1&amp;l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bootstrap-table简易教程">
+<meta property="og:url" content="https://fanhua.tech/2017/11/26/Bootstrap-table%E7%AE%80%E6%98%93%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="fanhua blog">
+<meta property="og:description" content="下载地址和源码1https:&#x2F;&#x2F;github.com&#x2F;wenzhixin&#x2F;bootstrap-table  相关 Js 和 Css123~&#x2F;jquery.js~&#x2F;bootstrap-table.js~&#x2F;bootstrap-table-zh-CN.min.js  12~&#x2F;bootstrap.min.css~&#x2F;bootstrap-table.min.css  使用在标签内写入如下 html 代码1&amp;l">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png">
+<meta property="article:published_time" content="2017-11-26T05:06:20.000Z">
+<meta property="article:modified_time" content="2023-05-08T00:26:11.771Z">
+<meta property="article:author" content="fanhua">
+<meta property="article:tag" content="Asp.Net">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png"><link rel="shortcut icon" href="/img/avatar.jpg"><link rel="canonical" href="https://fanhua.tech/2017/11/26/Bootstrap-table%E7%AE%80%E6%98%93%E6%95%99%E7%A8%8B/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-117147492-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-117147492-1');
+</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-08 08:26:11'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/avatar.jpg'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">50</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tag/"><div class="headline">标签</div><div class="length-num">33</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">fanhua blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Bootstrap-table简易教程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2017-11-26T05:06:20.000Z" title="发表于 2017-11-26 13:06:20">2017-11-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-08T00:26:11.771Z" title="更新于 2023-05-08 08:26:11">2023-05-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">550</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h4 id="下载地址和源码"><a href="#下载地址和源码" class="headerlink" title="下载地址和源码"></a>下载地址和源码</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/wenzhixin/bootstrap-table</span><br></pre></td></tr></table></figure>
+
+<h4 id="相关-Js-和-Css"><a href="#相关-Js-和-Css" class="headerlink" title="相关 Js 和 Css"></a>相关 Js 和 Css</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~/jquery.<span class="property">js</span></span><br><span class="line">~/bootstrap-table.<span class="property">js</span></span><br><span class="line">~/bootstrap-table-zh-<span class="variable constant_">CN</span>.<span class="property">min</span>.<span class="property">js</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~/bootstrap<span class="selector-class">.min</span><span class="selector-class">.css</span></span><br><span class="line">~/bootstrap-<span class="selector-tag">table</span><span class="selector-class">.min</span><span class="selector-class">.css</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><h5 id="在标签内写入如下-html-代码"><a href="#在标签内写入如下-html-代码" class="headerlink" title="在标签内写入如下 html 代码"></a>在<body>标签内写入如下 html 代码</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">id</span>=<span class="string">&quot;table&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="JS-代码"><a href="#JS-代码" class="headerlink" title="JS 代码"></a>JS 代码</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//页面加载时</span></span><br><span class="line">$(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">//初始化table</span></span><br><span class="line">    <span class="keyword">var</span> table = <span class="keyword">new</span> <span class="title class_">TableInit</span>();</span><br><span class="line">    table.<span class="title class_">Init</span>();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//TableInit();方法</span></span><br><span class="line"><span class="keyword">var</span> <span class="title class_">TableInit</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> tableInit = <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line"></span><br><span class="line">    tableInit.<span class="property">Init</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        $(<span class="string">&#x27;#table&#x27;</span>).<span class="title function_">bootstrapTable</span>(&#123;</span><br><span class="line">            <span class="attr">url</span>: <span class="string">&#x27;@Url.Action(&quot;InitTable&quot;)&#x27;</span>,    <span class="comment">//页面加载时,会发送查询条件到此Action</span></span><br><span class="line">            <span class="attr">method</span>: <span class="string">&#x27;get&#x27;</span>,    <span class="comment">//方法 get/post</span></span><br><span class="line">            <span class="attr">cache</span>: <span class="literal">false</span>,    <span class="comment">//缓存</span></span><br><span class="line">            <span class="attr">pagination</span>: <span class="literal">true</span>,    <span class="comment">//分页</span></span><br><span class="line">            <span class="attr">queryParams</span>: tableInit.<span class="property">QueryParams</span>,    <span class="comment">//查询条件</span></span><br><span class="line">            <span class="attr">sidePagination</span>: <span class="string">&#x27;server&#x27;</span>,   <span class="comment">//服务器端分页</span></span><br><span class="line">            <span class="attr">pageSize</span>: <span class="number">10</span>,    <span class="comment">//每页10条</span></span><br><span class="line">            <span class="attr">pageList</span>: [<span class="number">10</span>, <span class="number">15</span>, <span class="number">20</span>],    <span class="comment">//每页显示多少条</span></span><br><span class="line">            <span class="attr">showColumns</span>: <span class="literal">false</span>,    <span class="comment">//是否显示 内容列下拉框</span></span><br><span class="line">            <span class="attr">showToggle</span>: <span class="literal">false</span>,    <span class="comment">//是否显示 切换试图（table/card）按钮</span></span><br><span class="line">            <span class="attr">cardView</span>: <span class="literal">false</span>,    <span class="comment">//设置为 true将显示card视图，适用于移动设备。否则为table试图，适用于pc</span></span><br><span class="line">            <span class="attr">columns</span>: [&#123;     <span class="comment">//列值，和后台返回的列对应</span></span><br><span class="line">                <span class="attr">field</span>: <span class="string">&#x27;checkbox&#x27;</span>,     <span class="comment">//选择框</span></span><br><span class="line">                <span class="attr">checkbox</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="comment">//rowspan: 2,</span></span><br><span class="line">                <span class="attr">align</span>: <span class="string">&#x27;center&#x27;</span>,</span><br><span class="line">                <span class="attr">valign</span>: <span class="string">&#x27;middle&#x27;</span></span><br><span class="line">            &#125;, &#123;</span><br><span class="line">                <span class="attr">field</span>: <span class="string">&quot;Guid&quot;</span>,     <span class="comment">//value</span></span><br><span class="line">                <span class="attr">title</span>: <span class="string">&quot;主键&quot;</span>,          <span class="comment">//text</span></span><br><span class="line">                <span class="attr">visible</span>: <span class="literal">false</span>,          <span class="comment">//是否显示。false不显示</span></span><br><span class="line">                valign :<span class="string">&quot;middle&quot;</span> <span class="comment">//  &#x27;top&#x27;, &#x27;middle&#x27;, &#x27;bottom&#x27;</span></span><br><span class="line">                <span class="comment">// other. 详见文档</span></span><br><span class="line">             &#125;, &#123;</span><br><span class="line">                <span class="attr">field</span>: <span class="string">&quot;Name&quot;</span>,     <span class="comment">//value</span></span><br><span class="line">                <span class="attr">title</span>: <span class="string">&quot;姓名&quot;</span>,          <span class="comment">//text</span></span><br><span class="line">                valign :<span class="string">&quot;middle&quot;</span> <span class="comment">//  &#x27;top&#x27;, &#x27;middle&#x27;, &#x27;bottom&#x27;</span></span><br><span class="line">                <span class="comment">// other. 详见文档</span></span><br><span class="line">             &#125; ]</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    tableInit.<span class="property">QueryParams</span> = <span class="keyword">function</span> (<span class="params">params</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> temp = &#123;</span><br><span class="line">            <span class="attr">limit</span>: params.<span class="property">limit</span>, <span class="comment">//页码大小</span></span><br><span class="line">            <span class="attr">offset</span>: params.<span class="property">offset</span>, <span class="comment">//页码</span></span><br><span class="line">            <span class="comment">//其他查询条件</span></span><br><span class="line">            <span class="comment">//TODO.</span></span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">return</span> temp;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> tableInit;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Action-方法"><a href="#Action-方法" class="headerlink" title="Action 方法"></a>Action 方法</h5><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ActionResult <span class="title">InitTable</span>(<span class="params"><span class="built_in">int</span> limit, <span class="built_in">int</span> offset <span class="comment">/*其他查询条件*/</span></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> list = _userService.GetAllList();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回格式一定要包含 total和rows</span></span><br><span class="line">    <span class="keyword">var</span> obj = <span class="keyword">new</span></span><br><span class="line">    &#123;</span><br><span class="line">        total = list.Count,</span><br><span class="line">        rows = list.Skip(offset).Take(limit)</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Json(obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><del>_userService 通过注入的方式，注册到当前 Controller 中。 <img src= "/img/loading.gif" data-lazy-src="/2017/09/12/Mvc%E4%B8%8BAutofac%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/" alt="Mvc下Autofac简单示例"></del></p>
+<h5 id="bootstrap-table-其他事件、方法"><a href="#bootstrap-table-其他事件、方法" class="headerlink" title="bootstrap-table 其他事件、方法"></a>bootstrap-table 其他事件、方法</h5><p>api</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://bootstrap-table.wenzhixin.net.cn/documentation/</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取checkbox选中的行</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">GetIdSelections</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> $.<span class="title function_">map</span>($(<span class="string">&quot;#table&quot;</span>).<span class="title function_">bootstrapTable</span>(<span class="string">&quot;getSelections&quot;</span>), <span class="keyword">function</span> (<span class="params">row</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> row;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//双击事件</span></span><br><span class="line">$(<span class="string">&quot;#table&quot;</span>).<span class="title function_">on</span>(<span class="string">&quot;dbl-click-row.bs.table&quot;</span>, <span class="keyword">function</span> (<span class="params">row, $element, field</span>) &#123;</span><br><span class="line">  <span class="comment">//TODO</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//单选 取消单选事件</span></span><br><span class="line">$(<span class="string">&quot;#table&quot;</span>).<span class="title function_">on</span>(<span class="string">&quot;check.bs.table uncheck.bs.table&quot;</span>, <span class="keyword">function</span> (<span class="params">row</span>) &#123;</span><br><span class="line">  <span class="comment">//TODO</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//全选 反选事件</span></span><br><span class="line">$(<span class="string">&quot;#table&quot;</span>).<span class="title function_">on</span>(<span class="string">&quot;check-all.bs.table uncheck-all.bs.table&quot;</span>, <span class="keyword">function</span> (<span class="params">row</span>) &#123;</span><br><span class="line">  <span class="comment">//TODO</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">fanhua</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://fanhua.tech/2017/11/26/Bootstrap-table%E7%AE%80%E6%98%93%E6%95%99%E7%A8%8B/">https://fanhua.tech/2017/11/26/Bootstrap-table简易教程/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://fanhua.tech" target="_blank">fanhua blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tag/Asp-Net/">Asp.Net</a><a class="post-meta__tags" href="/tag/JavaScript/">JavaScript</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/wechat.jpg"/></a><div class="post-qr-code-desc"></div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/alipay.jpg"/></a><div class="post-qr-code-desc"></div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2018/03/23/Brook%E7%AE%80%E6%98%93%E6%8C%87%E5%8D%97/"><img class="prev-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/life-code-typography-hd-1600.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Brook简易指南</div></div></a></div><div class="next-post pull-right"><a href="/2017/09/12/Mvc%E4%B8%8BAutofac%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/"><img class="next-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Mvc下Autofac简单示例</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2016/07/06/ASP-NET之Excel下载模板、导入、导出操作/" title="Asp.Net之Excel下载模板、导入、导出操作"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2016-07-06</div><div class="title">Asp.Net之Excel下载模板、导入、导出操作</div></div></a></div><div><a href="/2016/07/01/ASP-NET服务器无法在发送HTTP标头之后设置内容类型/" title="Asp.Net服务器无法在发送HTTP标头之后设置内容类型"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2016-07-01</div><div class="title">Asp.Net服务器无法在发送HTTP标头之后设置内容类型</div></div></a></div><div><a href="/2016/11/11/Asp-Net之文件打包下载/" title="Asp.Net之文件打包下载"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2016-11-11</div><div class="title">Asp.Net之文件打包下载</div></div></a></div><div><a href="/2015/11/09/MVC-NET-学习笔记/" title="MVC.NET 学习笔记"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2015-11-09</div><div class="title">MVC.NET 学习笔记</div></div></a></div><div><a href="/2016/10/11/Npoi操作Excel/" title="Npoi操作Excel"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2016-10-11</div><div class="title">Npoi操作Excel</div></div></a></div><div><a href="/2016/05/03/JS-JSON日期格式化/" title="JS-JSON日期格式化"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/life-code-typography-hd-1600.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2016-05-03</div><div class="title">JS-JSON日期格式化</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/avatar.jpg'" alt="avatar"/><div class="author-info__name">fanhua</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">50</div></a></div><div class="card-info-data-item is-center"><a href="/tag/"><div class="headline">标签</div><div class="length-num">33</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/cnfanhua"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/cnfanhua" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:waxcjj@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80%E5%92%8C%E6%BA%90%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">下载地址和源码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3-Js-%E5%92%8C-Css"><span class="toc-number">2.</span> <span class="toc-text">相关 Js 和 Css</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9C%A8%E6%A0%87%E7%AD%BE%E5%86%85%E5%86%99%E5%85%A5%E5%A6%82%E4%B8%8B-html-%E4%BB%A3%E7%A0%81"><span class="toc-number">3.1.</span> <span class="toc-text">在标签内写入如下 html 代码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#JS-%E4%BB%A3%E7%A0%81"><span class="toc-number">3.2.</span> <span class="toc-text">JS 代码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Action-%E6%96%B9%E6%B3%95"><span class="toc-number">3.3.</span> <span class="toc-text">Action 方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#bootstrap-table-%E5%85%B6%E4%BB%96%E4%BA%8B%E4%BB%B6%E3%80%81%E6%96%B9%E6%B3%95"><span class="toc-number">3.4.</span> <span class="toc-text">bootstrap-table 其他事件、方法</span></a></li></ol></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/05/08/docker%E5%AE%B9%E5%99%A8%E5%86%85postgresql%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE/" title="docker容器内postgresql的配置文件位置"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs/other/picGo/202305080839247.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="docker容器内postgresql的配置文件位置"/></a><div class="content"><a class="title" href="/2023/05/08/docker%E5%AE%B9%E5%99%A8%E5%86%85postgresql%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE/" title="docker容器内postgresql的配置文件位置">docker容器内postgresql的配置文件位置</a><time datetime="2023-05-08T00:41:40.000Z" title="发表于 2023-05-08 08:41:40">2023-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/31/%E5%89%8D%E7%AB%AFexcel%E5%AF%BC%E5%87%BADemo-SheetJS/" title="前端excel导出Demo(SheetJS)"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/life-code-typography-hd-1600.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="前端excel导出Demo(SheetJS)"/></a><div class="content"><a class="title" href="/2021/07/31/%E5%89%8D%E7%AB%AFexcel%E5%AF%BC%E5%87%BADemo-SheetJS/" title="前端excel导出Demo(SheetJS)">前端excel导出Demo(SheetJS)</a><time datetime="2021-07-31T02:47:33.000Z" title="发表于 2021-07-31 10:47:33">2021-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/18/centos7%E5%BC%80%E7%A6%81%E7%AB%AF%E5%8F%A3%E4%BB%A5%E5%8F%8AIP%E9%99%90%E5%88%B6/" title="centos7开禁端口以及IP限制"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/centos.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="centos7开禁端口以及IP限制"/></a><div class="content"><a class="title" href="/2020/09/18/centos7%E5%BC%80%E7%A6%81%E7%AB%AF%E5%8F%A3%E4%BB%A5%E5%8F%8AIP%E9%99%90%E5%88%B6/" title="centos7开禁端口以及IP限制">centos7开禁端口以及IP限制</a><time datetime="2020-09-18T00:03:10.000Z" title="发表于 2020-09-18 08:03:10">2020-09-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/05/31/%E5%85%B3%E4%BA%8Egitalk%E6%8A%A5Validation-Failed%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="关于gitalk报Validation Failed的解决方案"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/gitalk.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于gitalk报Validation Failed的解决方案"/></a><div class="content"><a class="title" href="/2020/05/31/%E5%85%B3%E4%BA%8Egitalk%E6%8A%A5Validation-Failed%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="关于gitalk报Validation Failed的解决方案">关于gitalk报Validation Failed的解决方案</a><time datetime="2020-05-31T08:24:27.000Z" title="发表于 2020-05-31 16:24:27">2020-05-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/05/30/Oracle%E5%88%A0%E9%99%A4%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%A9%BA%E9%97%B4%E4%B8%8E%E7%94%A8%E6%88%B7%E5%91%BD%E4%BB%A4/" title="Oracle删除创建表空间与用户命令"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/database.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Oracle删除创建表空间与用户命令"/></a><div class="content"><a class="title" href="/2020/05/30/Oracle%E5%88%A0%E9%99%A4%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%A9%BA%E9%97%B4%E4%B8%8E%E7%94%A8%E6%88%B7%E5%91%BD%E4%BB%A4/" title="Oracle删除创建表空间与用户命令">Oracle删除创建表空间与用户命令</a><time datetime="2020-05-30T06:10:01.000Z" title="发表于 2020-05-30 14:10:01">2020-05-30</time></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png)"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By fanhua</div><div class="framework-info"><span>Github </span><a target="_blank" rel="noopener" href="https://github.com/cnfanhua">cnfanhua</a><span class="footer-separator"> </span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk({
+      clientID: '94b729caad07e8fe824b',
+      clientSecret: '0a8b2f5ad654e4eacaf85fb15b1c68e0ebf66b76',
+      repo: 'BlogComment',
+      owner: 'cnfanhua',
+      admin: ['cnfanhua'],
+      id: '58af33d3552ab5c559081feb09fdc120',
+      language: 'zh-CN',
+      perPage: 10,
+      distractionFreeMode: false,
+      pagerDirection: 'last',
+      createIssueManually: false,
+      updateCountCallback: commentCount
+    })
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MVC.NET 学习笔记 | fanhua blog</title><meta name="keywords" content="Asp.Net,Mvc"><meta name="author" content="fanhua"><meta name="copyright" content="fanhua"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="MVC（Model-View-Controller）   Model（模型）是应用程序中用于处理应用程序数据逻辑的部分。　　通常模型对象负责在数据库中存取数据。 View（视图）是应用程序中处理数据显示的部分。　　通常视图是依据模型数据创建的。 Controller（控制器）是应用程序中处理用户交互的部分。　　通常控制器负责从视图读取数据，控制用户输入，并向模型发送数据。(百度百科)   0x00">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MVC.NET 学习笔记">
+<meta property="og:url" content="https://fanhua.tech/2015/11/09/MVC-NET-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="fanhua blog">
+<meta property="og:description" content="MVC（Model-View-Controller）   Model（模型）是应用程序中用于处理应用程序数据逻辑的部分。　　通常模型对象负责在数据库中存取数据。 View（视图）是应用程序中处理数据显示的部分。　　通常视图是依据模型数据创建的。 Controller（控制器）是应用程序中处理用户交互的部分。　　通常控制器负责从视图读取数据，控制用户输入，并向模型发送数据。(百度百科)   0x00">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png">
+<meta property="article:published_time" content="2015-11-09T08:27:00.000Z">
+<meta property="article:modified_time" content="2023-05-08T00:26:11.774Z">
+<meta property="article:author" content="fanhua">
+<meta property="article:tag" content="Asp.Net">
+<meta property="article:tag" content="Mvc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png"><link rel="shortcut icon" href="/img/avatar.jpg"><link rel="canonical" href="https://fanhua.tech/2015/11/09/MVC-NET-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-117147492-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-117147492-1');
+</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-08 08:26:11'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/avatar.jpg'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">50</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tag/"><div class="headline">标签</div><div class="length-num">33</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">fanhua blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">MVC.NET 学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2015-11-09T08:27:00.000Z" title="发表于 2015-11-09 16:27:00">2015-11-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-08T00:26:11.774Z" title="更新于 2023-05-08 08:26:11">2023-05-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>MVC（Model-View-Controller）</p>
+<blockquote>
+<ul>
+<li>Model（模型）是应用程序中用于处理应用程序数据逻辑的部分。<br>　　通常模型对象负责在数据库中存取数据。</li>
+<li>View（视图）是应用程序中处理数据显示的部分。<br>　　通常视图是依据模型数据创建的。</li>
+<li>Controller（控制器）是应用程序中处理用户交互的部分。<br>　　通常控制器负责从视图读取数据，控制用户输入，并向模型发送数据。(百度百科)</li>
+</ul>
+</blockquote>
+<h3 id="0x00-控制器约定"><a href="#0x00-控制器约定" class="headerlink" title="0x00.控制器约定"></a>0x00.控制器约定</h3><blockquote>
+<ul>
+<li>必须以 Controller 结尾</li>
+<li>控制器下的 Action 方法一定是 Public，否则回报 404</li>
+<li>action 对应的页面是：views 下面和控制器同名文件夹下和 action 同名的视图</li>
+</ul>
+</blockquote>
+<h3 id="0x01-四种传值方式"><a href="#0x01-四种传值方式" class="headerlink" title="0x01.四种传值方式"></a>0x01.四种传值方式</h3><blockquote>
+<ul>
+<li>ViewData<br>　　　　后台: ViewData[“TEST1”] = “TEST1”;<br>　　　　前台(cshtml):ViewData[“TEST1”] = @ViewData[“TEST1”]</li>
+<li>ViewBag（实际上是通过 ViewData 来传递，所以相同 key 的值会被覆盖）<br>　　　　后台: ViewBag.TEST2 = “TEST2”;　　　　<br>　　　　前台(cshtml):ViewBag.TEST2 = @ViewBag.TEST2</li>
+<li>TempData<br>　　　　后台：TempData[“TEST3”] = “TEST3”;<br>　　　　前台(cshtml)：TempData[“TEST3”] = @TempData[“TEST3”]</li>
+<li>View()</li>
+</ul>
+</blockquote>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Cat cat = <span class="keyword">new</span> Cat()</span><br><span class="line">&#123;</span><br><span class="line">    Name=<span class="string">&quot;TEST&quot;</span>,</span><br><span class="line">    Age=<span class="number">100</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> View(cat);</span><br><span class="line">前台</span><br><span class="line">@&#123;</span><br><span class="line">    Cat cat = Model <span class="keyword">as</span> Cat;</span><br><span class="line">    &#125;</span><br><span class="line">    @cat.Name-----@cat.Age</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x02-Razor-视图"><a href="#0x02-Razor-视图" class="headerlink" title="0x02.Razor 视图"></a>0x02.Razor 视图</h3><p>01.扩展名:cshtml<br>02.@:Razor 语法, 在@{}中所写的代码都是 c#代码 03.强类型视图：指定当前 view 使用某个实体对象<br>04._layout.cshtml</p>
+<blockquote>
+<ul>
+<li>001.整个网站的布局，相当于 asp.net 中的母版页。</li>
+<li>002.@RenderBody(),布局页的占位符，会被子页面中的内容替换。</li>
+<li><a href="mailto:&#48;&#48;&#51;&#x2e;&#x40;&#83;&#116;&#x79;&#x6c;&#101;&#115;&#x2e;&#82;&#x65;&#x6e;&#100;&#101;&#114;">&#48;&#48;&#51;&#x2e;&#x40;&#83;&#116;&#x79;&#x6c;&#101;&#115;&#x2e;&#82;&#x65;&#x6e;&#100;&#101;&#114;</a>(“某虚拟路径名”) 作用，根据虚拟路径名查找物理路径对应的 css 文件</li>
+<li><a href="mailto:&#x30;&#48;&#52;&#46;&#64;&#x53;&#99;&#x72;&#x69;&#112;&#116;&#x73;&#x2e;&#x52;&#x65;&#x6e;&#x64;&#101;&#x72;">&#x30;&#48;&#52;&#46;&#64;&#x53;&#99;&#x72;&#x69;&#112;&#116;&#x73;&#x2e;&#x52;&#x65;&#x6e;&#x64;&#101;&#x72;</a>(“某虚拟路径名”) 作用，根据虚拟路径名查找物理路径对应的 js 文件</li>
+<li>005.003 和 004 使用的条件是，存在 BundleConfig.cs 文件并在 Global.asax 文件中注册过。优点是，压缩 css 和 js 文件的大小</li>
+<li>006.RenderSection(“scripts”, required: false) RenderSection 所定义的标签可以被子页面重写，如果 required 为 true，则子页面必须重写，否则可以重写，也可以不重写。</li>
+</ul>
+</blockquote>
+<p>05._viewstart.cshtml</p>
+<blockquote>
+<ul>
+<li>001.此文件的作用是，将_layout.cshtml 文件自动加载到所有的.cshtml 文件中。当然如果页面指定了@{layout=null}，则不会加载</li>
+<li>002.如果 Views 文件夹下的文件夹下也存在_layout.cshtml，则加载顺序是 Views 文件夹下的_layout.cshtml–&gt;Views 文件夹下的文件夹下的_layout.cshtml</li>
+</ul>
+</blockquote>
+<p>06.移除 aspx 视图引擎：MVC 使用两套视图引擎，排序为 1.aspx 2.razor<br>移除方法，在 Global.asax 文件的 Application_Start()方法中添加 ViewEngines.Engines.Remove(0); 即可<br>07.HtmlHelper 扩展<br>扩展 HtmlHelper:三要素 静态类、静态方法、this 关键字。最后将命名空间改成 System.Web.Mvc，目的是为了防止重复引入命名空间<br>08.@helper 扩展<br>在.cshtml 文件中使用。类似 C#中方法的定义、js 中定义 function<br>定义如下：</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@helper A(<span class="built_in">string</span> a, <span class="built_in">string</span> b)</span><br><span class="line">&#123;</span><br><span class="line">  &lt;h1&gt;@A+@b&lt;h1&gt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//使用</span></span><br><span class="line">@A(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>)    <span class="comment">/*输出 a+b*/</span></span><br></pre></td></tr></table></figure>
+
+<p>09.分部视图引用</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Html.Partial(<span class="string">&quot;PartialViewName&quot;</span>)</span><br><span class="line">@&#123; Html.RenderPartial(<span class="string">&quot;PartialViewName&quot;</span>); &#125;</span><br><span class="line"><span class="comment">//Partial有返回值MvcHtmlString;RenderPartial没有返回值</span></span><br><span class="line"><span class="comment">//Partial是将视图内容直接生成一个字符串并返回，RenderPartial方法是直接输出至当前HttpContext</span></span><br><span class="line"><span class="comment">//return PartialView()不会执行 _ViewStart.cshtml</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="0x03-路由规则–2018-年-3-月-30-日"><a href="#0x03-路由规则–2018-年-3-月-30-日" class="headerlink" title="0x03.路由规则–2018 年 3 月 30 日"></a>0x03.路由规则–2018 年 3 月 30 日</h3><p>01.mvc 程序第一次启动时，会执行 Global.asax 文件中 Application_Start()方法，调用 RouteConfig.RegisterRoutes()注册好的路由规则 02.路由的主要作用是，mvc 会根据路由规则来解析 url，以确定由哪个 Controller-action 执行 03.创建以及默认路由</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//001.在App_Start文件夹中新建RouteConfig.cs</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">RouteConfig</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">RegisterRoute</span>(<span class="params">RouteCollection routes</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//忽略对.axd文件的路由</span></span><br><span class="line">        routes.IgnoreRoute(<span class="string">&quot;&#123;resource&#125;.axd/&#123;*pathInfo&#125;&quot;</span>);</span><br><span class="line"></span><br><span class="line">        routes.MapRoute(</span><br><span class="line">            name: <span class="string">&quot;default&quot;</span>,</span><br><span class="line">            url: <span class="string">&quot;&#123;controller&#125;/&#123;action&#125;/&#123;id&#125;&quot;</span>,</span><br><span class="line">            <span class="literal">default</span>: <span class="keyword">new</span> &#123;controller = <span class="string">&quot;Home&quot;</span>, action = <span class="string">&quot;Index&quot;</span>, id = UrlParameter.Optional&#125;  <span class="comment">//id表示可选参数；程序会默认加载Home控制器下的Index方法</span></span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//002.在Global文件中注册路由</span></span><br><span class="line"><span class="comment">//在Application_Start()方法中添加 RouteConfig.RegisterRoutes(RouteTable.Routes);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//003.路由约束</span></span><br><span class="line"><span class="comment">//在MapRoute方法中添加</span></span><br><span class="line"><span class="comment">//contraints: new&#123; id= @&quot;\\d+&quot;&#125; //约束当前路由规则的id参数只能是数字</span></span><br><span class="line"><span class="comment">//namespaces: new string[] &#123;&quot;namespaceName&quot;&#125; //会去指定的命名空间下查找对应的控制器</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="0x04-ActionResult-子类"><a href="#0x04-ActionResult-子类" class="headerlink" title="0x04.ActionResult 子类"></a>0x04.ActionResult 子类</h3><p>01.ViewResult() –&gt; 返回想返回的视图。<br>02.ContentResult() –&gt; 返回内容、不需要有对应的视图<br>03.JsonResult() –&gt; 可以用作 ajax 请求，如果是 get 请求则一定要在 Json()中写入 JsonRequestBehavior.AllowGet<br>04.HttpStatusCodeResult() –&gt; 用户自己设置需要相应的状态码<br>05.JavaScriptResult() –&gt; 配合视图中<script src='/Controller/action'></script>用<br>06.FileResult() –&gt; 文件的操作，如下载，验证码等<br>07.RedirectResult() –&gt; 执行页面跳转。本质在响应报文头中产生了 Location:路径的命令<br>08.RedirectToRouteResult() –&gt; 使用某路由规则进行跳转</p>
+<h3 id="0x05-模型注解"><a href="#0x05-模型注解" class="headerlink" title="0x05.模型注解"></a>0x05.模型注解</h3><p>01.Required:可以现实对视图页面上对应的模型特性属性文本框进行非空验证<br>当属性为空或者为 null 时，会引发一个验证错误<br>02.StringLength:约束属性值的长度<br>[stringLength(160, mininumlength=3)]表示至少输入 3 个字符，最多 160 个字符才有效<br>03.DisplayName:在视图上可以利用@Html.DisplayName() @Html.DisplayNameFor() @Html.LabelFor 来显示具体的值<br>04.Compare:将当前度假了此特性的属性值与目标值比对<br>05.RegularExpression:使用正则表达式来对属性值进行约束<br>06.DataType:标示附加的类型<br>07.Remote:实现对当前属性值内容的检查。通过 ajax 请求验证</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Remote(<span class="string">&quot;Check&quot;</span>, <span class="string">&quot;Home&quot;</span>, ErrorMessage = <span class="string">&quot;当前名字已存在，请更换一个&quot;</span>, HttpMethod = <span class="string">&quot;POST&quot;</span>)</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="built_in">string</span> Name&#123; <span class="keyword">get</span>; <span class="keyword">set</span>;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> ActionResult <span class="title">Check</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">string</span> name = Request[<span class="string">&quot;Name&quot;</span>];</span><br><span class="line">    <span class="keyword">if</span>(name == <span class="string">&quot;A&quot;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> Content(<span class="string">&quot;false&quot;</span>);   <span class="comment">//说明：返回false说明此name已存在，此name不可用</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> Content(<span class="string">&quot;true&quot;</span>);    <span class="comment">//此name可用</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>08.Rang:约束数值型类型的数值范围、可以是 int/double<br>09.DataType:标示附加的类型</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">DataTypeDomo</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">DataType(DataType.Text)</span>]</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Name&#123;<span class="keyword">get</span>; <span class="keyword">set</span>;&#125;</span><br><span class="line">    [<span class="meta">DataType(DataType.Password)</span>]</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> password&#123;<span class="keyword">get</span>; <span class="keyword">set</span>;&#125;</span><br><span class="line">    [<span class="meta">DataType(DataType.PhoneNumber)</span>]</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> PhoneNumber&#123;<span class="keyword">get</span>; <span class="keyword">set</span>;&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>10.错误信息提示：</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(ErrorMessage = <span class="string">&quot;tishi&quot;</span>) <span class="comment">//可以使用&#123;0&#125;,&#123;0&#125;会使用当前属性的属性名</span></span><br></pre></td></tr></table></figure>
+
+<p>11.自定义注解：<br>所有的注解都派生自基类 ValidationAttribute，一个抽象类，在命名空间 System.ComponentModel.DataAnnotaticns 下。需要重写基类中提供的 IsValid 方法的其中一个版本。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span>参数1是要验证的对象的值</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> ValidationResult <span class="title">IsValid</span>(<span class="params"><span class="built_in">object</span> obj, ValidationContext validationContext</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> ValidationResult.Success;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x05-区域"><a href="#0x05-区域" class="headerlink" title="0x05.区域"></a>0x05.区域</h3><p>区域位于项目主站 Areas 文件夹中<br>区域下都有一个继承自 AreaRegistration 的子类，假设区域名称叫”Study”,其重写了两个方法</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">xx</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">StudyAreaRegistration</span> : <span class="title">AreaRegistration</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">override</span> <span class="built_in">string</span> AreaName</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">get</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">&quot;Sdtdy&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">RegisterArea</span>(<span class="params">AreaRegistrationContext context</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            context.MapRoute(</span><br><span class="line">                <span class="string">&quot;Study_default&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Study/&#123;controller&#125;/&#123;action&#125;/&#123;id&#125;&quot;</span>,</span><br><span class="line">                <span class="keyword">new</span> &#123; action = <span class="string">&quot;Index&quot;</span>, id = UrlParameter.Optional &#125;</span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="0x06-过滤器"><a href="#0x06-过滤器" class="headerlink" title="0x06.过滤器"></a>0x06.过滤器</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+<th>执行顺序</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OnAuthentication</td>
+<td>认证</td>
+<td>1</td>
+</tr>
+<tr>
+<td>OnAuthorization</td>
+<td>授权</td>
+<td>2</td>
+</tr>
+<tr>
+<td>OnActionExecuting</td>
+<td>方法执行之前</td>
+<td>3</td>
+</tr>
+<tr>
+<td>OnActionExecuted</td>
+<td>方法执行之后</td>
+<td>4</td>
+</tr>
+<tr>
+<td>OnResultExecuting</td>
+<td>结果返回之前</td>
+<td>5</td>
+</tr>
+<tr>
+<td>OnResultExecuted</td>
+<td>结果返回之后</td>
+<td>7</td>
+</tr>
+<tr>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td>View()</td>
+<td>–</td>
+<td>6</td>
+</tr>
+</tbody></table>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">fanhua</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://fanhua.tech/2015/11/09/MVC-NET-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">https://fanhua.tech/2015/11/09/MVC-NET-学习笔记/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://fanhua.tech" target="_blank">fanhua blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tag/Asp-Net/">Asp.Net</a><a class="post-meta__tags" href="/tag/Mvc/">Mvc</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/wechat.jpg"/></a><div class="post-qr-code-desc"></div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/alipay.jpg"/></a><div class="post-qr-code-desc"></div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2016/01/28/Github-hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/"><img class="prev-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/life-code-typography-hd-1600.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Github hexo+Next搭建个人静态博客</div></div></a></div><div class="next-post pull-right"><a href="/2015/08/11/DBHelper/"><img class="next-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/life-code-typography-hd-1600.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">DBHelper--C#</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2016/07/06/ASP-NET之Excel下载模板、导入、导出操作/" title="Asp.Net之Excel下载模板、导入、导出操作"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2016-07-06</div><div class="title">Asp.Net之Excel下载模板、导入、导出操作</div></div></a></div><div><a href="/2016/07/01/ASP-NET服务器无法在发送HTTP标头之后设置内容类型/" title="Asp.Net服务器无法在发送HTTP标头之后设置内容类型"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2016-07-01</div><div class="title">Asp.Net服务器无法在发送HTTP标头之后设置内容类型</div></div></a></div><div><a href="/2016/11/11/Asp-Net之文件打包下载/" title="Asp.Net之文件打包下载"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2016-11-11</div><div class="title">Asp.Net之文件打包下载</div></div></a></div><div><a href="/2017/11/26/Bootstrap-table简易教程/" title="Bootstrap-table简易教程"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-11-26</div><div class="title">Bootstrap-table简易教程</div></div></a></div><div><a href="/2016/10/11/Npoi操作Excel/" title="Npoi操作Excel"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2016-10-11</div><div class="title">Npoi操作Excel</div></div></a></div><div><a href="/2017/09/12/Mvc下Autofac简单示例/" title="Mvc下Autofac简单示例"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-09-12</div><div class="title">Mvc下Autofac简单示例</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/avatar.jpg'" alt="avatar"/><div class="author-info__name">fanhua</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">50</div></a></div><div class="card-info-data-item is-center"><a href="/tag/"><div class="headline">标签</div><div class="length-num">33</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/cnfanhua"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/cnfanhua" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:waxcjj@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x00-%E6%8E%A7%E5%88%B6%E5%99%A8%E7%BA%A6%E5%AE%9A"><span class="toc-number">1.</span> <span class="toc-text">0x00.控制器约定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-%E5%9B%9B%E7%A7%8D%E4%BC%A0%E5%80%BC%E6%96%B9%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">0x01.四种传值方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-Razor-%E8%A7%86%E5%9B%BE"><span class="toc-number">3.</span> <span class="toc-text">0x02.Razor 视图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x03-%E8%B7%AF%E7%94%B1%E8%A7%84%E5%88%99%E2%80%932018-%E5%B9%B4-3-%E6%9C%88-30-%E6%97%A5"><span class="toc-number">4.</span> <span class="toc-text">0x03.路由规则–2018 年 3 月 30 日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x04-ActionResult-%E5%AD%90%E7%B1%BB"><span class="toc-number">5.</span> <span class="toc-text">0x04.ActionResult 子类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x05-%E6%A8%A1%E5%9E%8B%E6%B3%A8%E8%A7%A3"><span class="toc-number">6.</span> <span class="toc-text">0x05.模型注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x05-%E5%8C%BA%E5%9F%9F"><span class="toc-number">7.</span> <span class="toc-text">0x05.区域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x06-%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-number">8.</span> <span class="toc-text">0x06.过滤器</span></a></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/05/08/docker%E5%AE%B9%E5%99%A8%E5%86%85postgresql%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE/" title="docker容器内postgresql的配置文件位置"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs/other/picGo/202305080839247.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="docker容器内postgresql的配置文件位置"/></a><div class="content"><a class="title" href="/2023/05/08/docker%E5%AE%B9%E5%99%A8%E5%86%85postgresql%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE/" title="docker容器内postgresql的配置文件位置">docker容器内postgresql的配置文件位置</a><time datetime="2023-05-08T00:41:40.000Z" title="发表于 2023-05-08 08:41:40">2023-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/31/%E5%89%8D%E7%AB%AFexcel%E5%AF%BC%E5%87%BADemo-SheetJS/" title="前端excel导出Demo(SheetJS)"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/life-code-typography-hd-1600.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="前端excel导出Demo(SheetJS)"/></a><div class="content"><a class="title" href="/2021/07/31/%E5%89%8D%E7%AB%AFexcel%E5%AF%BC%E5%87%BADemo-SheetJS/" title="前端excel导出Demo(SheetJS)">前端excel导出Demo(SheetJS)</a><time datetime="2021-07-31T02:47:33.000Z" title="发表于 2021-07-31 10:47:33">2021-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/18/centos7%E5%BC%80%E7%A6%81%E7%AB%AF%E5%8F%A3%E4%BB%A5%E5%8F%8AIP%E9%99%90%E5%88%B6/" title="centos7开禁端口以及IP限制"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/centos.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="centos7开禁端口以及IP限制"/></a><div class="content"><a class="title" href="/2020/09/18/centos7%E5%BC%80%E7%A6%81%E7%AB%AF%E5%8F%A3%E4%BB%A5%E5%8F%8AIP%E9%99%90%E5%88%B6/" title="centos7开禁端口以及IP限制">centos7开禁端口以及IP限制</a><time datetime="2020-09-18T00:03:10.000Z" title="发表于 2020-09-18 08:03:10">2020-09-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/05/31/%E5%85%B3%E4%BA%8Egitalk%E6%8A%A5Validation-Failed%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="关于gitalk报Validation Failed的解决方案"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/gitalk.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于gitalk报Validation Failed的解决方案"/></a><div class="content"><a class="title" href="/2020/05/31/%E5%85%B3%E4%BA%8Egitalk%E6%8A%A5Validation-Failed%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="关于gitalk报Validation Failed的解决方案">关于gitalk报Validation Failed的解决方案</a><time datetime="2020-05-31T08:24:27.000Z" title="发表于 2020-05-31 16:24:27">2020-05-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/05/30/Oracle%E5%88%A0%E9%99%A4%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%A9%BA%E9%97%B4%E4%B8%8E%E7%94%A8%E6%88%B7%E5%91%BD%E4%BB%A4/" title="Oracle删除创建表空间与用户命令"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/database.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Oracle删除创建表空间与用户命令"/></a><div class="content"><a class="title" href="/2020/05/30/Oracle%E5%88%A0%E9%99%A4%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%A9%BA%E9%97%B4%E4%B8%8E%E7%94%A8%E6%88%B7%E5%91%BD%E4%BB%A4/" title="Oracle删除创建表空间与用户命令">Oracle删除创建表空间与用户命令</a><time datetime="2020-05-30T06:10:01.000Z" title="发表于 2020-05-30 14:10:01">2020-05-30</time></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png)"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By fanhua</div><div class="framework-info"><span>Github </span><a target="_blank" rel="noopener" href="https://github.com/cnfanhua">cnfanhua</a><span class="footer-separator"> </span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk({
+      clientID: '94b729caad07e8fe824b',
+      clientSecret: '0a8b2f5ad654e4eacaf85fb15b1c68e0ebf66b76',
+      repo: 'BlogComment',
+      owner: 'cnfanhua',
+      admin: ['cnfanhua'],
+      id: '20bce8aebbfbb75b7a42098ff517560b',
+      language: 'zh-CN',
+      perPage: 10,
+      distractionFreeMode: false,
+      pagerDirection: 'last',
+      createIssueManually: false,
+      updateCountCallback: commentCount
+    })
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>

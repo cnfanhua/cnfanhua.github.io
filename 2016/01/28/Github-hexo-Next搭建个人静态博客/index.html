@@ -1,0 +1,365 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Github hexo+Next搭建个人静态博客 | fanhua blog</title><meta name="keywords" content="Github博客,Hexo"><meta name="author" content="fanhua"><meta name="copyright" content="fanhua"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="0000.环境配置0x00.windows 下  Node.js(必须) 一路默认安装即可。 安装Git(必须) 一路默认安装即可。 Github账号(必须)   0x01.linux 下(Linux mint)  Git安装   1sudo apt-get install git    Node.js下载 然后打开终端输入以下命令进行解压   123456$ tar -zxf node-vxxx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Github hexo+Next搭建个人静态博客">
+<meta property="og:url" content="https://fanhua.tech/2016/01/28/Github-hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:site_name" content="fanhua blog">
+<meta property="og:description" content="0000.环境配置0x00.windows 下  Node.js(必须) 一路默认安装即可。 安装Git(必须) 一路默认安装即可。 Github账号(必须)   0x01.linux 下(Linux mint)  Git安装   1sudo apt-get install git    Node.js下载 然后打开终端输入以下命令进行解压   123456$ tar -zxf node-vxxx">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/life-code-typography-hd-1600.jpg">
+<meta property="article:published_time" content="2016-01-28T10:29:00.000Z">
+<meta property="article:modified_time" content="2023-05-08T00:26:11.773Z">
+<meta property="article:author" content="fanhua">
+<meta property="article:tag" content="Github博客">
+<meta property="article:tag" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/life-code-typography-hd-1600.jpg"><link rel="shortcut icon" href="/img/avatar.jpg"><link rel="canonical" href="https://fanhua.tech/2016/01/28/Github-hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-117147492-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-117147492-1');
+</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-08 08:26:11'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/avatar.jpg'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">50</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tag/"><div class="headline">标签</div><div class="length-num">33</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/life-code-typography-hd-1600.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">fanhua blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Github hexo+Next搭建个人静态博客</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2016-01-28T10:29:00.000Z" title="发表于 2016-01-28 18:29:00">2016-01-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-08T00:26:11.773Z" title="更新于 2023-05-08 08:26:11">2023-05-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="0000-环境配置"><a href="#0000-环境配置" class="headerlink" title="0000.环境配置"></a>0000.环境配置</h2><h3 id="0x00-windows-下"><a href="#0x00-windows-下" class="headerlink" title="0x00.windows 下"></a>0x00.windows 下</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://nodejs.org/en/">Node.js</a>(必须) 一路默认安装即可。</li>
+<li>安装<a target="_blank" rel="noopener" href="http://git-scm.com/download/">Git</a>(必须) 一路默认安装即可。</li>
+<li><a target="_blank" rel="noopener" href="http://github.com/">Github</a>账号(必须)</li>
+</ul>
+</blockquote>
+<h3 id="0x01-linux-下-Linux-mint"><a href="#0x01-linux-下-Linux-mint" class="headerlink" title="0x01.linux 下(Linux mint)"></a>0x01.linux 下(Linux mint)</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://git-scm.com/download">Git</a>安装</li>
+</ul>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://nodejs.org/en/">Node.js</a>下载 然后打开终端输入以下命令进行解压</li>
+</ul>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ tar -zxf node-vxxx.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> node-vxxx</span><br><span class="line">$ sudo cp -r bin/* /usr/local/bin/</span><br><span class="line">$ sudo cp -r lib/* /usr/local/lib/</span><br><span class="line">$ sudo cp -r include/* /usr/local/include/</span><br><span class="line">Nodejs安装完成</span><br></pre></td></tr></table></figure>
+
+<h2 id="0001-安装-Hexo"><a href="#0001-安装-Hexo" class="headerlink" title="0001.安装 Hexo"></a>0001.安装 Hexo</h2><p>nodejs 和 git 安装完成后，打开’git bash’安装 hexo</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x00-Start"><a href="#0x00-Start" class="headerlink" title="0x00.Start"></a>0x00.Start</h3><p>新建一个文件夹(如 E:\Hexo)，在此文件夹中执行命令</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x01-本地查看"><a href="#0x01-本地查看" class="headerlink" title="0x01.本地查看"></a>0x01.本地查看</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server //(等价的命令)hexo s</span><br></pre></td></tr></table></figure>
+
+<p>后在浏览器中输入</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:4000/</span><br></pre></td></tr></table></figure>
+
+<p>此时，会有一篇文章 hello world,对应的文件为 E:\Hexo\source_posts\hello-world.md<br>文章用<a target="_blank" rel="noopener" href="https://www.zybuluo.com/mdeditor">markdown</a>语法写.</p>
+<h3 id="0x02-新建文章"><a href="#0x02-新建文章" class="headerlink" title="0x02.新建文章"></a>0x02.新建文章</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;New article&quot;</span><br></pre></td></tr></table></figure>
+
+<p>会新建一个名为’New article’的文章，执行以下命令之后查看。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo generate   //生成静态网页以及css js文件</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+<p>至此，本地博客搭建完毕。下一步移植到 Github</p>
+<h2 id="0010-Github"><a href="#0010-Github" class="headerlink" title="0010.Github"></a>0010.Github</h2><p>新建 repository,项目名必须是:name.github.io(name 是你的账号名)。<br>我的账号名是 cnfanhua,新建的项目名也就是 cnfanhua.github.io</p>
+<h2 id="0011-部署"><a href="#0011-部署" class="headerlink" title="0011.部署"></a>0011.部署</h2><p>在你的 hexo 文件夹中有个重要的文件<font color='#f4871f'>_config.yml</font>,打开编辑,把’userame’换成你的账号名</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https:<span class="comment">//github.com/userame/username.github.io.git</span></span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p>执行下列命令后部署(部署前，需要配置 SSh，否则失败)。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>至此，个人博客搭建完成。<br>注意:每次修改后 需要 hexo g 命令保存 然后 hexo d 命令上传</p>
+<h3 id="0x00-外配置-SSh"><a href="#0x00-外配置-SSh" class="headerlink" title="0x00.外配置 SSh"></a>0x00.外配置 SSh</h3><p>打开 git bash</p>
+<blockquote>
+<ul>
+<li>设置 username 和 email</li>
+</ul>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;test&quot;</span><br><span class="line">git config --global user.email &quot;test@gmail.com&quot;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>生成秘钥</li>
+</ul>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;test@gmail.com&quot;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>最后得到 id_rsa 和 id_rsa.pub 两个文件，把 id_rsa.pub 的内容粘贴到 github 中即可</li>
+</ul>
+</blockquote>
+<h2 id="0100-NexT-主题"><a href="#0100-NexT-主题" class="headerlink" title="0100.NexT 主题"></a>0100.NexT 主题</h2><h3 id="0x00-下载"><a href="#0x00-下载" class="headerlink" title="0x00.下载"></a>0x00.下载</h3><p><a target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">gitHub</a>,clone 到你的博客目录\themes 目录下(E:\Hexo\themes 下)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:iissnan/hexo-theme-next.git</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x01-使用"><a href="#0x01-使用" class="headerlink" title="0x01.使用"></a>0x01.使用</h3><p>打开站点总配置_config.yml(即 E:\Hexo 下的_config.yml),找到 theme 换成 next 即可(theme: next),记得每一个冒号后面要有一个<strong>空格</strong></p>
+<h2 id="0101-NexT-配置"><a href="#0101-NexT-配置" class="headerlink" title="0101.NexT-配置"></a>0101.NexT-配置</h2><h3 id="0x00-插件安装"><a href="#0x00-插件安装" class="headerlink" title="0x00.插件安装"></a>0x00.插件安装</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install &lt;插件名&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x01-卸载插件"><a href="#0x01-卸载插件" class="headerlink" title="0x01.卸载插件"></a>0x01.卸载插件</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall &lt;插件名&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x02-多说评论"><a href="#0x02-多说评论" class="headerlink" title="0x02.多说评论"></a>0x02.多说评论</h3><p>使用多说前需要先在 多说 创建一个站点。具体步骤如下：</p>
+<blockquote>
+<ul>
+<li>登录后在首页选择 “我要安装”。</li>
+<li>创建站点，填写表单。多说域名 这一栏填写的即是你的 duoshuo_shortname<br><font color='red'>主题配置文件</font> 中设置：</li>
+</ul>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 多说热评文章 true 或者 false</span><br><span class="line"><span class="function">duoshuo_shortname: &#x27;多说域名&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="0x03-Google-分析"><a href="#0x03-Google-分析" class="headerlink" title="0x03.Google 分析"></a>0x03.Google 分析</h3><p>登陆 google 分析<a target="_blank" rel="noopener" href="https://www.google.com/intl/zh-CN/analytics/">网站</a>获取 ID<br>编辑 站点配置文件，新增字段 google_analytics，值设置成你的 Google 跟踪 ID。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">google_analytics: <span class="title">UA</span>-<span class="title">XXX</span>...</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="0x04-社交链接，将在侧栏中显示"><a href="#0x04-社交链接，将在侧栏中显示" class="headerlink" title="0x04.社交链接，将在侧栏中显示"></a>0x04.社交链接，将在侧栏中显示</h3><p>将以下代码放到<font color='red'>站点配置文件</font></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">social:</span></span><br><span class="line"><span class="function">  <span class="title">GitHub</span>: <span class="title">your</span>-<span class="title">github</span>-<span class="title">url</span></span></span><br><span class="line"><span class="function">  <span class="title">Twitter</span>: <span class="title">your</span>-<span class="title">twitter</span>-<span class="title">url</span></span></span><br><span class="line"><span class="function">  <span class="title">Weibo</span>: <span class="title">your</span>-<span class="title">weibo</span>-<span class="title">url</span></span></span><br><span class="line"><span class="function">  <span class="title">DouBan</span>: <span class="title">your</span>-<span class="title">douban</span>-<span class="title">url</span></span></span><br><span class="line"><span class="function">  <span class="title">ZhiHu</span>: <span class="title">your</span>-<span class="title">zhihu</span>-<span class="title">url</span></span></span><br><span class="line"><span class="function">  # 等等</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="0x05-文章目录"><a href="#0x05-文章目录" class="headerlink" title="0x05.文章目录"></a>0x05.文章目录</h3><p><font color='red'>主题配置文件</font> 中设置：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">sidebar: <span class="title">post</span>   #自动展示有目录的文章的目录</span></span><br><span class="line"><span class="function">#<span class="title">sidebar</span>: <span class="title">always</span>    #总是展示</span></span><br><span class="line"><span class="function">#<span class="title">sidebar</span>: <span class="title">hide</span>      #隐藏</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="0x06-添加云标签"><a href="#0x06-添加云标签" class="headerlink" title="0x06.添加云标签"></a>0x06.添加云标签</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page &quot;tags&quot;        //新增tags页面</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>编辑刚才的页面(path\source\tags\index.md)</li>
+</ul>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: TagCloud</span><br><span class="line">date: <span class="number">2016</span><span class="number">-01</span><span class="number">-21</span> <span class="number">16</span>:<span class="number">12</span>:<span class="number">58</span></span><br><span class="line">type: <span class="string">&quot;tags&quot;</span></span><br><span class="line">comments: <span class="literal">false</span>     <span class="comment">//关闭评论</span></span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>编辑<font color='red'>主题配置文件</font>,添加 tags 到 menu 中</li>
+</ul>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">menu:</span></span><br><span class="line"><span class="function">  <span class="title">home</span>: /</span></span><br><span class="line"><span class="function">  <span class="title">archives</span>: /<span class="title">archives</span></span></span><br><span class="line"><span class="function">  <span class="title">tags</span>: /<span class="title">tags</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="0x07-添加-high-一下"><a href="#0x07-添加-high-一下" class="headerlink" title="0x07.添加 high 一下"></a>0x07.添加 high 一下</h3><p>在 Hexo\themes\next\layout_partials\header.swig 中的 ul 标签加入如下 li 代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">    <span class="attr">title</span>=<span class="string">&quot;把这个链接拖到你的Chrome收藏夹工具栏中&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">href</span>=<span class="string">&#x27;javascript:(function() &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">    function c() &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">        var e = document.createElement(&quot;link&quot;);</span></span></span><br><span class="line"><span class="string"><span class="tag">        e.setAttribute(&quot;type&quot;, &quot;text/css&quot;);</span></span></span><br><span class="line"><span class="string"><span class="tag">        e.setAttribute(&quot;rel&quot;, &quot;stylesheet&quot;);</span></span></span><br><span class="line"><span class="string"><span class="tag">        e.setAttribute(&quot;href&quot;, f);</span></span></span><br><span class="line"><span class="string"><span class="tag">        e.setAttribute(&quot;class&quot;, l);</span></span></span><br><span class="line"><span class="string"><span class="tag">        document.body.appendChild(e)</span></span></span><br><span class="line"><span class="string"><span class="tag">    &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag"> </span></span></span><br><span class="line"><span class="string"><span class="tag">    function h() &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">        var e = document.getElementsByClassName(l);</span></span></span><br><span class="line"><span class="string"><span class="tag">        for (var t = 0; t &lt; e.length; t++) &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">            document.body.removeChild(e[t])</span></span></span><br><span class="line"><span class="string"><span class="tag">        &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag">    &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag"> </span></span></span><br><span class="line"><span class="string"><span class="tag">    function p() &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">        var e = document.createElement(&quot;div&quot;);</span></span></span><br><span class="line"><span class="string"><span class="tag">        e.setAttribute(&quot;class&quot;, a);</span></span></span><br><span class="line"><span class="string"><span class="tag">        document.body.appendChild(e);</span></span></span><br><span class="line"><span class="string"><span class="tag">        setTimeout(function() &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">            document.body.removeChild(e)</span></span></span><br><span class="line"><span class="string"><span class="tag">        &#125;, 100)</span></span></span><br><span class="line"><span class="string"><span class="tag">    &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag"> </span></span></span><br><span class="line"><span class="string"><span class="tag">    function d(e) &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">        return &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">            height : e.offsetHeight,</span></span></span><br><span class="line"><span class="string"><span class="tag">            width : e.offsetWidth</span></span></span><br><span class="line"><span class="string"><span class="tag">        &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag">    &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag"> </span></span></span><br><span class="line"><span class="string"><span class="tag">    function v(i) &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">        var s = d(i);</span></span></span><br><span class="line"><span class="string"><span class="tag">        return s.height &gt; e &amp;&amp; s.height &lt; n &amp;&amp; s.width &gt; t &amp;&amp; s.width &lt; r</span></span></span><br><span class="line"><span class="string"><span class="tag">    &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag"> </span></span></span><br><span class="line"><span class="string"><span class="tag">    function m(e) &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">        var t = e;</span></span></span><br><span class="line"><span class="string"><span class="tag">        var n = 0;</span></span></span><br><span class="line"><span class="string"><span class="tag">        while (!!t) &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">            n += t.offsetTop;</span></span></span><br><span class="line"><span class="string"><span class="tag">            t = t.offsetParent</span></span></span><br><span class="line"><span class="string"><span class="tag">        &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag">        return n</span></span></span><br><span class="line"><span class="string"><span class="tag">    &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag"> </span></span></span><br><span class="line"><span class="string"><span class="tag">    function g() &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">        var e = document.documentElement;</span></span></span><br><span class="line"><span class="string"><span class="tag">        if (!!window.innerWidth) &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">            return window.innerHeight</span></span></span><br><span class="line"><span class="string"><span class="tag">        &#125; else if (e &amp;&amp; !isNaN(e.clientHeight)) &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">            return e.clientHeight</span></span></span><br><span class="line"><span class="string"><span class="tag">        &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag">        return 0</span></span></span><br><span class="line"><span class="string"><span class="tag">    &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag"> </span></span></span><br><span class="line"><span class="string"><span class="tag">    function y() &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">        if (window.pageYOffset) &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">            return window.pageYOffset</span></span></span><br><span class="line"><span class="string"><span class="tag">        &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag">        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)</span></span></span><br><span class="line"><span class="string"><span class="tag">    &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag"> </span></span></span><br><span class="line"><span class="string"><span class="tag">    function E(e) &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">        var t = m(e);</span></span></span><br><span class="line"><span class="string"><span class="tag">        return t &gt;= w &amp;&amp; t &lt;= b + w</span></span></span><br><span class="line"><span class="string"><span class="tag">    &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag"> </span></span></span><br><span class="line"><span class="string"><span class="tag">    function S() &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">        var e = document.createElement(&quot;audio&quot;);</span></span></span><br><span class="line"><span class="string"><span class="tag">        e.setAttribute(&quot;class&quot;, l);</span></span></span><br><span class="line"><span class="string"><span class="tag">        e.src = i;</span></span></span><br><span class="line"><span class="string"><span class="tag">        e.loop = false;</span></span></span><br><span class="line"><span class="string"><span class="tag">        e.addEventListener(&quot;canplay&quot;, function() &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">            setTimeout(function() &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">                x(k)</span></span></span><br><span class="line"><span class="string"><span class="tag">            &#125;, 500);</span></span></span><br><span class="line"><span class="string"><span class="tag">            setTimeout(function() &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">                N();</span></span></span><br><span class="line"><span class="string"><span class="tag">                p();</span></span></span><br><span class="line"><span class="string"><span class="tag">                for (var e = 0; e &lt; O.length; e++) &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">                    T(O[e])</span></span></span><br><span class="line"><span class="string"><span class="tag">                &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag">            &#125;, 15500)</span></span></span><br><span class="line"><span class="string"><span class="tag">        &#125;, true);</span></span></span><br><span class="line"><span class="string"><span class="tag">        e.addEventListener(&quot;ended&quot;, function() &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">            N();</span></span></span><br><span class="line"><span class="string"><span class="tag">            h()</span></span></span><br><span class="line"><span class="string"><span class="tag">        &#125;, true);</span></span></span><br><span class="line"><span class="string"><span class="tag">        e.innerHTML = &quot; &lt;p&gt;If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.&lt;/p&gt; &lt;p&gt;&quot;;</span></span></span><br><span class="line"><span class="string"><span class="tag">        document.body.appendChild(e);</span></span></span><br><span class="line"><span class="string"><span class="tag">        e.play()</span></span></span><br><span class="line"><span class="string"><span class="tag">    &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag"> </span></span></span><br><span class="line"><span class="string"><span class="tag">    function x(e) &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">        e.className += &quot; &quot; + s + &quot; &quot; + o</span></span></span><br><span class="line"><span class="string"><span class="tag">    &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag"> </span></span></span><br><span class="line"><span class="string"><span class="tag">    function T(e) &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">        e.className += &quot; &quot; + s + &quot; &quot; + u[Math.floor(Math.random() * u.length)]</span></span></span><br><span class="line"><span class="string"><span class="tag">    &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag"> </span></span></span><br><span class="line"><span class="string"><span class="tag">    function N() &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">        var e = document.getElementsByClassName(s);</span></span></span><br><span class="line"><span class="string"><span class="tag">        var t = new RegExp(&quot;\\b&quot; + s + &quot;\\b&quot;);</span></span></span><br><span class="line"><span class="string"><span class="tag">        for (var n = 0; n &lt; e.length; ) &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">            e[n].className = e[n].className.replace(t, &quot;&quot;)</span></span></span><br><span class="line"><span class="string"><span class="tag">        &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag">    &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag"> </span></span></span><br><span class="line"><span class="string"><span class="tag">    var e = 30;</span></span></span><br><span class="line"><span class="string"><span class="tag">    var t = 30;</span></span></span><br><span class="line"><span class="string"><span class="tag">    var n = 350;</span></span></span><br><span class="line"><span class="string"><span class="tag">    var r = 350;</span></span></span><br><span class="line"><span class="string"><span class="tag">    var i = &quot;//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3&quot;;</span></span></span><br><span class="line"><span class="string"><span class="tag">    var s = &quot;mw-harlem_shake_me&quot;;</span></span></span><br><span class="line"><span class="string"><span class="tag">    var o = &quot;im_first&quot;;</span></span></span><br><span class="line"><span class="string"><span class="tag">    var u = [&quot;im_drunk&quot;, &quot;im_baked&quot;, &quot;im_trippin&quot;, &quot;im_blown&quot;];</span></span></span><br><span class="line"><span class="string"><span class="tag">    var a = &quot;mw-strobe_light&quot;;</span></span></span><br><span class="line"><span class="string"><span class="tag">    var f = &quot;//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css&quot;;</span></span></span><br><span class="line"><span class="string"><span class="tag">    var l = &quot;mw_added_css&quot;;</span></span></span><br><span class="line"><span class="string"><span class="tag">    var b = g();</span></span></span><br><span class="line"><span class="string"><span class="tag">    var w = y();</span></span></span><br><span class="line"><span class="string"><span class="tag">    var C = document.getElementsByTagName(&quot;*&quot;);</span></span></span><br><span class="line"><span class="string"><span class="tag">    var k = null;</span></span></span><br><span class="line"><span class="string"><span class="tag">    for (var L = 0; L &lt; C.length; L++) &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">        var A = C[L];</span></span></span><br><span class="line"><span class="string"><span class="tag">        if (v(A)) &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">            if (E(A)) &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">                k = A;</span></span></span><br><span class="line"><span class="string"><span class="tag">                break</span></span></span><br><span class="line"><span class="string"><span class="tag">            &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag">        &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag">    &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag">    if (A === null) &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">        console.warn(&quot;Could not find a node of the right size. Please try a different page.&quot;);</span></span></span><br><span class="line"><span class="string"><span class="tag">        return</span></span></span><br><span class="line"><span class="string"><span class="tag">    &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag">    c();</span></span></span><br><span class="line"><span class="string"><span class="tag">    S();</span></span></span><br><span class="line"><span class="string"><span class="tag">    var O = [];</span></span></span><br><span class="line"><span class="string"><span class="tag">    for (var L = 0; L &lt; C.length; L++) &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">        var A = C[L];</span></span></span><br><span class="line"><span class="string"><span class="tag">        if (v(A)) &#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">            O.push(A)</span></span></span><br><span class="line"><span class="string"><span class="tag">        &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag">    &#125;</span></span></span><br><span class="line"><span class="string"><span class="tag">&#125;)()    &#x27;</span></span></span><br><span class="line"><span class="tag">    &gt;</span>High一下&lt;/a</span><br><span class="line">  &gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="0x08-开启-RSS-功能"><a href="#0x08-开启-RSS-功能" class="headerlink" title="0x08.开启 RSS 功能"></a>0x08.开启 RSS 功能</h3><p>安装插件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-feed --save</span><br></pre></td></tr></table></figure>
+
+<p>后编辑<font color='red'>主题配置文件_config.yml</font>,添加如下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rss: /atom.xml #rss地址  默认即可</span><br></pre></td></tr></table></figure>
+
+<h2 id="0110-报错"><a href="#0110-报错" class="headerlink" title="0110.报错"></a>0110.报错</h2><h3 id="0x00-找不到-git-部署"><a href="#0x00-找不到-git-部署" class="headerlink" title="0x00.找不到 git 部署"></a>0x00.找不到 git 部署</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR Deployer not found: git</span><br></pre></td></tr></table></figure>
+
+<p>解决办法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x01-部署类型设置-git"><a href="#0x01-部署类型设置-git" class="headerlink" title="0x01.部署类型设置 git"></a>0x01.部署类型设置 git</h3><p>hexo 3.0 部署类型不再是 github,而是 git,修改<font color='red'>主题配置文件_config.yml</font>中 deploy 中的 type 为 git</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@cnfanhua.github.com:cnfanhua/cnfanhua.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<h2 id="0111-参考"><a href="#0111-参考" class="headerlink" title="0111.参考"></a>0111.参考</h2><p>1.<a target="_blank" rel="noopener" href="https://hexo.io/">hexo</a> 2.<a target="_blank" rel="noopener" href="http://blog.csdn.net/renfufei/article/details/37725057/">创建 GitHub 技术博客全攻略</a> 3.<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">搭建一个免费的，无限流量的 Blog—-github Pages 和 Jekyll 入门</a> 4.<a target="_blank" rel="noopener" href="http://www.jianshu.com/p/465830080ea9">HEXO+Github,搭建属于自己的博客</a> 5.<a target="_blank" rel="noopener" href="http://www.cnblogs.com/zhcncn/p/4097881.html">Hexo 搭建 Github 静态博客</a> 6.<a target="_blank" rel="noopener" href="http://zipperary.com/2013/05/29/hexo-guide-3/">hexo 系列教程：（三）hexo 博客的配置、使用</a> 7.<a target="_blank" rel="noopener" href="http://zipperary.com/2013/05/28/hexo-guide-2/">hexo 系列教程：（二）搭建 hexo 博客</a> 8.<a target="_blank" rel="noopener" href="http://theme-next.iissnan.com/">NexT</a> 9.<a target="_blank" rel="noopener" href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">廖雪峰 Git 教程</a></p>
+<h2 id="1000-2016-11-11-16-50-16-更新"><a href="#1000-2016-11-11-16-50-16-更新" class="headerlink" title="1000.2016.11.11 16:50:16 更新"></a>1000.2016.11.11 16:50:16 更新</h2><h3 id="0x00-绑定个人域名"><a href="#0x00-绑定个人域名" class="headerlink" title="0x00.绑定个人域名"></a>0x00.绑定个人域名</h3><blockquote>
+<ul>
+<li>Step1.我是从<a target="_blank" rel="noopener" href="https://wanwang.aliyun.com/">万网</a>购买的域名。</li>
+<li>Step2.在你的个人博客目录下/source 新建 CNAME(PS，无扩展名)，文件内容为你的域名(如：xxx.com 不带“http://”和“www”)</li>
+<li>Step3.重要的一步，在域名控制台新增解析设置，如下</li>
+<li>—–3.1.记录类型 A 主机记录 www 记录值 192.30.252.154 其他默认</li>
+<li>—–3.2.记录类型 A 主机记录@ 记录值 192.30.252.154 其他默认</li>
+<li>Step4.更新你的博客，依次执行 hexo clean\ hexo g -d</li>
+<li>Step5.waiting</li>
+</ul>
+</blockquote>
+<h3 id="0x01-hexo-g-d-之后报-404-错误"><a href="#0x01-hexo-g-d-之后报-404-错误" class="headerlink" title="0x01.hexo g -d 之后报 404 错误"></a>0x01.hexo g -d 之后报 404 错误</h3><p>本地测试 hexo s 正常，但是提交到服务器之后报 404 的错误，一些资源加载失败。原因是 github 升级了 jekyll<br>解决方案：<a target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next/issues/1220">@Issues1220</a><br>在博客文件夹根目录.deploy_git 文件夹下新增.nojekyll 文件。<br>How to Create it?</p>
+<blockquote>
+<ul>
+<li>Step1.CMD-&gt;notepad</li>
+<li>Step1.文件-另存为-选择目录输入”.nojekyll”-保存</li>
+</ul>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">fanhua</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://fanhua.tech/2016/01/28/Github-hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/">https://fanhua.tech/2016/01/28/Github-hexo-Next搭建个人静态博客/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://fanhua.tech" target="_blank">fanhua blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tag/Github%E5%8D%9A%E5%AE%A2/">Github博客</a><a class="post-meta__tags" href="/tag/Hexo/">Hexo</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/life-code-typography-hd-1600.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/wechat.jpg"/></a><div class="post-qr-code-desc"></div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/alipay.jpg"/></a><div class="post-qr-code-desc"></div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2016/01/31/Linux%E5%88%9D%E4%BD%93%E9%AA%8C%E4%B9%8BWindows-Linux%E5%8F%8C%E7%B3%BB%E7%BB%9F/"><img class="prev-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/manjaro.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Linux初体验之Windows Linux双系统</div></div></a></div><div class="next-post pull-right"><a href="/2015/11/09/MVC-NET-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><img class="next-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/asp-net-development.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MVC.NET 学习笔记</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2019/01/25/Github-Pages-自定义域名启用-HTTPS/" title="Github Pages 自定义域名启用 HTTPS"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/life-code-typography-hd-1600.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-01-25</div><div class="title">Github Pages 自定义域名启用 HTTPS</div></div></a></div><div><a href="/2020/05/31/关于gitalk报Validation-Failed的解决方案/" title="关于gitalk报Validation Failed的解决方案"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/gitalk.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-31</div><div class="title">关于gitalk报Validation Failed的解决方案</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/avatar.jpg'" alt="avatar"/><div class="author-info__name">fanhua</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">50</div></a></div><div class="card-info-data-item is-center"><a href="/tag/"><div class="headline">标签</div><div class="length-num">33</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/cnfanhua"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/cnfanhua" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:waxcjj@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0000-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">0000.环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x00-windows-%E4%B8%8B"><span class="toc-number">1.1.</span> <span class="toc-text">0x00.windows 下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-linux-%E4%B8%8B-Linux-mint"><span class="toc-number">1.2.</span> <span class="toc-text">0x01.linux 下(Linux mint)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0001-%E5%AE%89%E8%A3%85-Hexo"><span class="toc-number">2.</span> <span class="toc-text">0001.安装 Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x00-Start"><span class="toc-number">2.1.</span> <span class="toc-text">0x00.Start</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-%E6%9C%AC%E5%9C%B0%E6%9F%A5%E7%9C%8B"><span class="toc-number">2.2.</span> <span class="toc-text">0x01.本地查看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-%E6%96%B0%E5%BB%BA%E6%96%87%E7%AB%A0"><span class="toc-number">2.3.</span> <span class="toc-text">0x02.新建文章</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0010-Github"><span class="toc-number">3.</span> <span class="toc-text">0010.Github</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0011-%E9%83%A8%E7%BD%B2"><span class="toc-number">4.</span> <span class="toc-text">0011.部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x00-%E5%A4%96%E9%85%8D%E7%BD%AE-SSh"><span class="toc-number">4.1.</span> <span class="toc-text">0x00.外配置 SSh</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0100-NexT-%E4%B8%BB%E9%A2%98"><span class="toc-number">5.</span> <span class="toc-text">0100.NexT 主题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x00-%E4%B8%8B%E8%BD%BD"><span class="toc-number">5.1.</span> <span class="toc-text">0x00.下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-%E4%BD%BF%E7%94%A8"><span class="toc-number">5.2.</span> <span class="toc-text">0x01.使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0101-NexT-%E9%85%8D%E7%BD%AE"><span class="toc-number">6.</span> <span class="toc-text">0101.NexT-配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x00-%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="toc-number">6.1.</span> <span class="toc-text">0x00.插件安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-%E5%8D%B8%E8%BD%BD%E6%8F%92%E4%BB%B6"><span class="toc-number">6.2.</span> <span class="toc-text">0x01.卸载插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-%E5%A4%9A%E8%AF%B4%E8%AF%84%E8%AE%BA"><span class="toc-number">6.3.</span> <span class="toc-text">0x02.多说评论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x03-Google-%E5%88%86%E6%9E%90"><span class="toc-number">6.4.</span> <span class="toc-text">0x03.Google 分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x04-%E7%A4%BE%E4%BA%A4%E9%93%BE%E6%8E%A5%EF%BC%8C%E5%B0%86%E5%9C%A8%E4%BE%A7%E6%A0%8F%E4%B8%AD%E6%98%BE%E7%A4%BA"><span class="toc-number">6.5.</span> <span class="toc-text">0x04.社交链接，将在侧栏中显示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x05-%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95"><span class="toc-number">6.6.</span> <span class="toc-text">0x05.文章目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x06-%E6%B7%BB%E5%8A%A0%E4%BA%91%E6%A0%87%E7%AD%BE"><span class="toc-number">6.7.</span> <span class="toc-text">0x06.添加云标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x07-%E6%B7%BB%E5%8A%A0-high-%E4%B8%80%E4%B8%8B"><span class="toc-number">6.8.</span> <span class="toc-text">0x07.添加 high 一下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x08-%E5%BC%80%E5%90%AF-RSS-%E5%8A%9F%E8%83%BD"><span class="toc-number">6.9.</span> <span class="toc-text">0x08.开启 RSS 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0110-%E6%8A%A5%E9%94%99"><span class="toc-number">7.</span> <span class="toc-text">0110.报错</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x00-%E6%89%BE%E4%B8%8D%E5%88%B0-git-%E9%83%A8%E7%BD%B2"><span class="toc-number">7.1.</span> <span class="toc-text">0x00.找不到 git 部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-%E9%83%A8%E7%BD%B2%E7%B1%BB%E5%9E%8B%E8%AE%BE%E7%BD%AE-git"><span class="toc-number">7.2.</span> <span class="toc-text">0x01.部署类型设置 git</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0111-%E5%8F%82%E8%80%83"><span class="toc-number">8.</span> <span class="toc-text">0111.参考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1000-2016-11-11-16-50-16-%E6%9B%B4%E6%96%B0"><span class="toc-number">9.</span> <span class="toc-text">1000.2016.11.11 16:50:16 更新</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x00-%E7%BB%91%E5%AE%9A%E4%B8%AA%E4%BA%BA%E5%9F%9F%E5%90%8D"><span class="toc-number">9.1.</span> <span class="toc-text">0x00.绑定个人域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-hexo-g-d-%E4%B9%8B%E5%90%8E%E6%8A%A5-404-%E9%94%99%E8%AF%AF"><span class="toc-number">9.2.</span> <span class="toc-text">0x01.hexo g -d 之后报 404 错误</span></a></li></ol></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/05/08/docker%E5%AE%B9%E5%99%A8%E5%86%85postgresql%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE/" title="docker容器内postgresql的配置文件位置"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs/other/picGo/202305080839247.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="docker容器内postgresql的配置文件位置"/></a><div class="content"><a class="title" href="/2023/05/08/docker%E5%AE%B9%E5%99%A8%E5%86%85postgresql%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE/" title="docker容器内postgresql的配置文件位置">docker容器内postgresql的配置文件位置</a><time datetime="2023-05-08T00:41:40.000Z" title="发表于 2023-05-08 08:41:40">2023-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/31/%E5%89%8D%E7%AB%AFexcel%E5%AF%BC%E5%87%BADemo-SheetJS/" title="前端excel导出Demo(SheetJS)"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/life-code-typography-hd-1600.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="前端excel导出Demo(SheetJS)"/></a><div class="content"><a class="title" href="/2021/07/31/%E5%89%8D%E7%AB%AFexcel%E5%AF%BC%E5%87%BADemo-SheetJS/" title="前端excel导出Demo(SheetJS)">前端excel导出Demo(SheetJS)</a><time datetime="2021-07-31T02:47:33.000Z" title="发表于 2021-07-31 10:47:33">2021-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/18/centos7%E5%BC%80%E7%A6%81%E7%AB%AF%E5%8F%A3%E4%BB%A5%E5%8F%8AIP%E9%99%90%E5%88%B6/" title="centos7开禁端口以及IP限制"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/centos.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="centos7开禁端口以及IP限制"/></a><div class="content"><a class="title" href="/2020/09/18/centos7%E5%BC%80%E7%A6%81%E7%AB%AF%E5%8F%A3%E4%BB%A5%E5%8F%8AIP%E9%99%90%E5%88%B6/" title="centos7开禁端口以及IP限制">centos7开禁端口以及IP限制</a><time datetime="2020-09-18T00:03:10.000Z" title="发表于 2020-09-18 08:03:10">2020-09-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/05/31/%E5%85%B3%E4%BA%8Egitalk%E6%8A%A5Validation-Failed%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="关于gitalk报Validation Failed的解决方案"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/gitalk.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于gitalk报Validation Failed的解决方案"/></a><div class="content"><a class="title" href="/2020/05/31/%E5%85%B3%E4%BA%8Egitalk%E6%8A%A5Validation-Failed%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="关于gitalk报Validation Failed的解决方案">关于gitalk报Validation Failed的解决方案</a><time datetime="2020-05-31T08:24:27.000Z" title="发表于 2020-05-31 16:24:27">2020-05-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/05/30/Oracle%E5%88%A0%E9%99%A4%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%A9%BA%E9%97%B4%E4%B8%8E%E7%94%A8%E6%88%B7%E5%91%BD%E4%BB%A4/" title="Oracle删除创建表空间与用户命令"><img data-lazy-src="https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/database.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Oracle删除创建表空间与用户命令"/></a><div class="content"><a class="title" href="/2020/05/30/Oracle%E5%88%A0%E9%99%A4%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%A9%BA%E9%97%B4%E4%B8%8E%E7%94%A8%E6%88%B7%E5%91%BD%E4%BB%A4/" title="Oracle删除创建表空间与用户命令">Oracle删除创建表空间与用户命令</a><time datetime="2020-05-30T06:10:01.000Z" title="发表于 2020-05-30 14:10:01">2020-05-30</time></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://cdn.jsdelivr.net/gh/cnfanhua/imgs@main/blog/life-code-typography-hd-1600.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By fanhua</div><div class="framework-info"><span>Github </span><a target="_blank" rel="noopener" href="https://github.com/cnfanhua">cnfanhua</a><span class="footer-separator"> </span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk({
+      clientID: '94b729caad07e8fe824b',
+      clientSecret: '0a8b2f5ad654e4eacaf85fb15b1c68e0ebf66b76',
+      repo: 'BlogComment',
+      owner: 'cnfanhua',
+      admin: ['cnfanhua'],
+      id: '9bb29b175d197cbf2dff5055fe6c3e8e',
+      language: 'zh-CN',
+      perPage: 10,
+      distractionFreeMode: false,
+      pagerDirection: 'last',
+      createIssueManually: false,
+      updateCountCallback: commentCount
+    })
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
